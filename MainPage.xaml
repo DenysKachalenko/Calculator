@@ -70,6 +70,11 @@
 
         <!--#endregion -->
 
+        <!-- TB -->
+        <Viewbox Grid.Row="1" Grid.ColumnSpan="4" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="6,0,6,0">
+            <TextBlock x:Name="textBlock" Grid.Row="1" Grid.ColumnSpan="4" HorizontalAlignment="Center"  Text="0" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="6" TextAlignment="Right" Width="31" LineHeight="9"/>
+        </Viewbox>
+        
         <!--#region Buttons row 2 -->
         <Button x:Name="ButtonPosOrNeg" Grid.Row="2" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="32" FontWeight="Normal" FontFamily="Franklin Gothic Medium" FontStyle="Normal" RequestedTheme="Dark" Margin="1,1,1,1">
             <Viewbox>
