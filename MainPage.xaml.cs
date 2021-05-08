@@ -132,7 +132,11 @@ namespace Calculator
 
         private void ButtonSquare_Click(object sender, RoutedEventArgs e)
         {
-            
+            double a = Double.Parse(TextBlockNumber.Text);
+            TextBlockExpression.Text = a + "^2=";
+            a *= a;
+            TextBlockNumber.Text = a.ToString();
+            HistoryList.Items.Add(new ListViewItem { Content = TextBlockExpression.Text + TextBlockNumber.Text, FontSize = 18 });
         }
     }
 }
