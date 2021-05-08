@@ -129,5 +129,10 @@ namespace Calculator
             AddNumber('1');
         }
         #endregion
+
+        private void ButtonSquare_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }
