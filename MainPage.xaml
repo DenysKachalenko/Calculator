@@ -72,11 +72,11 @@
 
         <!-- TB -->
         <Viewbox Grid.Row="1" Grid.ColumnSpan="4" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="6,0,6,0">
-            <TextBlock x:Name="textBlock" Grid.Row="1" Grid.ColumnSpan="4" HorizontalAlignment="Center"  Text="0" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="6" TextAlignment="Right" Width="31" LineHeight="9"/>
+            <TextBlock x:Name="TextBlockNumber" Grid.Row="1" Grid.ColumnSpan="4" HorizontalAlignment="Center"  Text="" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="6" TextAlignment="Right" Width="31" LineHeight="9"/>
         </Viewbox>
         
         <!--#region Buttons row 2 -->
-        <Button x:Name="ButtonPosOrNeg" Grid.Row="2" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="32" FontWeight="Normal" FontFamily="Franklin Gothic Medium" FontStyle="Normal" RequestedTheme="Dark" Margin="1,1,1,1">
+        <Button x:Name="ButtonPosOrNeg" Grid.Row="2" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="32" FontWeight="Normal" FontFamily="Franklin Gothic Medium" FontStyle="Normal" RequestedTheme="Dark" Margin="1,1,1,1" Click="ButtonPosOrNeg_Click">
             <Viewbox>
                 <TextBlock Text="+/-"/>
             </Viewbox>
@@ -91,7 +91,7 @@
                 <TextBlock Text="√"/>
             </Viewbox>
         </Button>
-        <Button x:Name="ButtonDelete" Grid.Row="2" Grid.Column="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="32" FontWeight="Normal" FontFamily="Franklin Gothic Medium" FontStyle="Normal" RequestedTheme="Dark" Margin="1,1,1,1">
+        <Button x:Name="ButtonDelete" Grid.Row="2" Grid.Column="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="32" FontWeight="Normal" FontFamily="Franklin Gothic Medium" FontStyle="Normal" RequestedTheme="Dark" Margin="1,1,1,1" Click="ButtonDelete_Click">
             <Viewbox>
                 <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE94F;"/>
             </Viewbox>
@@ -99,22 +99,22 @@
         <!--#endregion -->
 
         <!--#region Buttons row 3 -->
-        <Button x:Name="ButtonSeven" Grid.Row="3" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="32" FontWeight="Normal" FontFamily="Franklin Gothic Medium" FontStyle="Normal" RequestedTheme="Dark" Margin="1,1,1,1">
+        <Button x:Name="ButtonSeven" Grid.Row="3" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="32" FontWeight="Normal" FontFamily="Franklin Gothic Medium" FontStyle="Normal" RequestedTheme="Dark" Margin="1,1,1,1" Click="ButtonSeven_Click">
             <Viewbox>
                 <TextBlock Text="7"/>
             </Viewbox>
         </Button>
-        <Button x:Name="ButtonEight" Grid.Row="3" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="32" FontWeight="Normal" FontFamily="Franklin Gothic Medium" FontStyle="Normal" RequestedTheme="Dark" Margin="1,1,1,1">
+        <Button x:Name="ButtonEight" Grid.Row="3" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="32" FontWeight="Normal" FontFamily="Franklin Gothic Medium" FontStyle="Normal" RequestedTheme="Dark" Margin="1,1,1,1" Click="ButtonEight_Click">
             <Viewbox>
                 <TextBlock Text="8"/>
             </Viewbox>
         </Button>
-        <Button x:Name="ButtonNine" Grid.Row="3" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="32" FontWeight="Normal" FontFamily="Franklin Gothic Medium" FontStyle="Normal" RequestedTheme="Dark" Margin="1,1,1,1">
+        <Button x:Name="ButtonNine" Grid.Row="3" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="32" FontWeight="Normal" FontFamily="Franklin Gothic Medium" FontStyle="Normal" RequestedTheme="Dark" Margin="1,1,1,1" Click="ButtonNine_Click">
             <Viewbox>
                 <TextBlock Text="9"/>
             </Viewbox>
         </Button>
-        <Button x:Name="Button1" Grid.Row="3" Grid.Column="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="32" FontWeight="Normal" FontFamily="Franklin Gothic Medium" FontStyle="Normal" RequestedTheme="Dark" Margin="1,1,1,1">
+        <Button x:Name="ButtonDivision" Grid.Row="3" Grid.Column="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="32" FontWeight="Normal" FontFamily="Franklin Gothic Medium" FontStyle="Normal" RequestedTheme="Dark" Margin="1,1,1,1">
             <Viewbox>
                 <TextBlock Text="/"/>
             </Viewbox>
@@ -122,17 +122,17 @@
         <!--#endregion -->
 
         <!--#region Buttons row 4 -->
-        <Button x:Name="ButtonFour" Grid.Row="4" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="32" FontWeight="Normal" FontFamily="Franklin Gothic Medium" FontStyle="Normal" RequestedTheme="Dark" Margin="1,1,1,1">
+        <Button x:Name="ButtonFour" Grid.Row="4" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="32" FontWeight="Normal" FontFamily="Franklin Gothic Medium" FontStyle="Normal" RequestedTheme="Dark" Margin="1,1,1,1" Click="ButtonFour_Click">
             <Viewbox>
                 <TextBlock Text="4"/>
             </Viewbox>
         </Button>
-        <Button x:Name="ButtonFive" Grid.Row="4" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="32" FontWeight="Normal" FontFamily="Franklin Gothic Medium" FontStyle="Normal" RequestedTheme="Dark" Margin="1,1,1,1">
+        <Button x:Name="ButtonFive" Grid.Row="4" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="32" FontWeight="Normal" FontFamily="Franklin Gothic Medium" FontStyle="Normal" RequestedTheme="Dark" Margin="1,1,1,1" Click="ButtonFive_Click">
             <Viewbox>
                 <TextBlock Text="5"/>
             </Viewbox>
         </Button>
-        <Button x:Name="ButtonSix" Grid.Row="4" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="32" FontWeight="Normal" FontFamily="Franklin Gothic Medium" FontStyle="Normal" RequestedTheme="Dark" Margin="1,1,1,1">
+        <Button x:Name="ButtonSix" Grid.Row="4" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="32" FontWeight="Normal" FontFamily="Franklin Gothic Medium" FontStyle="Normal" RequestedTheme="Dark" Margin="1,1,1,1" Click="ButtonSix_Click">
             <Viewbox>
                 <TextBlock Text="6"/>
             </Viewbox>
@@ -145,17 +145,17 @@
         <!--#endregion -->
 
         <!--#region Buttons row 5 -->
-        <Button x:Name="ButtonOne" Grid.Row="5" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="32" FontWeight="Normal" FontFamily="Franklin Gothic Medium" FontStyle="Normal" RequestedTheme="Dark" Margin="1,1,1,1">
+        <Button x:Name="ButtonOne" Grid.Row="5" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="32" FontWeight="Normal" FontFamily="Franklin Gothic Medium" FontStyle="Normal" RequestedTheme="Dark" Margin="1,1,1,1" Click="ButtonOne_Click">
             <Viewbox>
                 <TextBlock Text="1"/>
             </Viewbox>
         </Button>
-        <Button x:Name="ButtonTWo" Grid.Row="5" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="32" FontWeight="Normal" FontFamily="Franklin Gothic Medium" FontStyle="Normal" RequestedTheme="Dark" Margin="1,1,1,1">
+        <Button x:Name="ButtonTwo" Grid.Row="5" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="32" FontWeight="Normal" FontFamily="Franklin Gothic Medium" FontStyle="Normal" RequestedTheme="Dark" Margin="1,1,1,1" Click="ButtonTWo_Click">
             <Viewbox>
                 <TextBlock Text="2"/>
             </Viewbox>
         </Button>
-        <Button x:Name="ButtonThree" Grid.Row="5" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="32" FontWeight="Normal" FontFamily="Franklin Gothic Medium" FontStyle="Normal" RequestedTheme="Dark" Margin="1,1,1,1">
+        <Button x:Name="ButtonThree" Grid.Row="5" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="32" FontWeight="Normal" FontFamily="Franklin Gothic Medium" FontStyle="Normal" RequestedTheme="Dark" Margin="1,1,1,1" Click="ButtonThree_Click">
             <Viewbox>
                 <TextBlock Text="3"/>
             </Viewbox>
@@ -168,12 +168,12 @@
         <!--#endregion -->
 
         <!--#region Buttons row 6 -->
-        <Button x:Name="ButtonPoint" Grid.Row="6" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="32" FontWeight="Normal" FontFamily="Franklin Gothic Medium" FontStyle="Normal" RequestedTheme="Dark" Margin="1,1,1,1">
+        <Button x:Name="ButtonPoint" Grid.Row="6" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="32" FontWeight="Normal" FontFamily="Franklin Gothic Medium" FontStyle="Normal" RequestedTheme="Dark" Margin="1,1,1,1" Click="ButtonPoint_Click">
             <Viewbox>
                 <TextBlock Text="."/>
             </Viewbox>
         </Button>
-        <Button x:Name="ButtonZero" Grid.Row="6" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="32" FontWeight="Normal" FontFamily="Franklin Gothic Medium" FontStyle="Normal" RequestedTheme="Dark" Margin="1,1,1,1">
+        <Button x:Name="ButtonZero" Grid.Row="6" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="32" FontWeight="Normal" FontFamily="Franklin Gothic Medium" FontStyle="Normal" RequestedTheme="Dark" Margin="1,1,1,1" Click="ButtonZero_Click">
             <Viewbox>
                 <TextBlock Text="0"/>
             </Viewbox>

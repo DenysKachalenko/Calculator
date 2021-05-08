@@ -36,5 +36,98 @@ namespace Calculator
             HistorySplitView.IsPaneOpen = !HistorySplitView.IsPaneOpen;
             //HistoryList.Items.Add(new ListViewItem { Content = "1023 - 133 = 1212" });
         }
+
+        private void AddNumber(char symbol)
+        {
+            TextBlockNumber.Text += symbol; 
+        }
+
+        private void ButtonDelete_Click(object sender, RoutedEventArgs e)
+        {
+            if (TextBlockNumber.Text != "") 
+            {
+                TextBlockNumber.Text = TextBlockNumber.Text.Remove(TextBlockNumber.Text.Length -1,  1);
+            }
+        }
+
+        private void ButtonPosOrNeg_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (TextBlockNumber.Text == "")
+            {
+                AddNumber('-');
+            }
+            else if(TextBlockNumber.Text[0] != '-') 
+            {
+                TextBlockNumber.Text = TextBlockNumber.Text.Insert(0, "-");
+            }
+            else if (TextBlockNumber.Text[0] == '-')
+            {
+                TextBlockNumber.Text = TextBlockNumber.Text.Replace("-", "");
+            }
+        }
+
+        private void ButtonPoint_Click(object sender, RoutedEventArgs e)
+        {
+            if (TextBlockNumber.Text != "" && TextBlockNumber.Text != "-" && !TextBlockNumber.Text.Contains(".")) 
+            {
+                AddNumber('.');
+            }
+        }
+
+        #region Numbers Click
+        private void ButtonZero_Click(object sender, RoutedEventArgs e)
+        {
+            if (TextBlockNumber.Text != "") 
+            {
+                AddNumber('0');
+            }
+        }
+
+        private void ButtonNine_Click(object sender, RoutedEventArgs e)
+        {
+            AddNumber('9');
+        }
+
+        private void ButtonEight_Click(object sender, RoutedEventArgs e)
+        {
+            AddNumber('8');
+        }
+
+        private void ButtonSeven_Click(object sender, RoutedEventArgs e)
+        {
+            AddNumber('7');
+        }
+
+        private void ButtonSix_Click(object sender, RoutedEventArgs e)
+        {
+            AddNumber('6');
+        }
+
+        private void ButtonFive_Click(object sender, RoutedEventArgs e)
+        {
+            AddNumber('5');
+        }
+
+        private void ButtonFour_Click(object sender, RoutedEventArgs e)
+        {
+            AddNumber('4');
+        }
+
+        private void ButtonThree_Click(object sender, RoutedEventArgs e)
+        {
+            AddNumber('3');
+        }
+
+        private void ButtonTwo_Click(object sender, RoutedEventArgs e)
+        {
+            AddNumber('2');
+        }
+
+        private void ButtonOne_Click(object sender, RoutedEventArgs e)
+        {
+            AddNumber('1');
+        }
+        #endregion
     }
 }
