@@ -22,6 +22,11 @@ namespace Calculator
     /// </summary>
     public sealed partial class MainPage : Page
     {
+
+        double numberA = 0;
+        double numberB = 0;
+        char operation = '0';
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -34,7 +39,15 @@ namespace Calculator
         private void HistoryButton_Click(object sender, RoutedEventArgs e)
         {
             HistorySplitView.IsPaneOpen = !HistorySplitView.IsPaneOpen;
-            //HistoryList.Items.Add(new ListViewItem { Content = "1023 - 133 = 1212" });
+        }
+
+        private void ClearButton_Click(object sender, RoutedEventArgs e)
+        {
+            TextBlockNumber.Text = "";
+            TextBlockExpression.Text = "";
+            numberA = 0;
+            numberB = 0;
+            operation = '0';
         }
 
         private void AddNumber(char symbol)
@@ -78,10 +91,7 @@ namespace Calculator
         #region Numbers Click
         private void ButtonZero_Click(object sender, RoutedEventArgs e)
         {
-            if (TextBlockNumber.Text != "") 
-            {
-                AddNumber('0');
-            }
+            AddNumber('0');
         }
 
         private void ButtonNine_Click(object sender, RoutedEventArgs e)
@@ -130,13 +140,152 @@ namespace Calculator
         }
         #endregion
 
+        public void Calculating(char symbol)
+        {
+            if (numberA == 0 && TextBlockNumber.Text != "" && TextBlockNumber.Text != "-")
+            {
+                operation = symbol;
+                numberA = Double.Parse(TextBlockNumber.Text);
+                TextBlockExpression.Text = numberA + operation.ToString();
+                TextBlockNumber.Text = "";
+            }
+            else if (numberA != 0 && TextBlockNumber.Text == "" && TextBlockNumber.Text != "-")
+            {
+                operation = symbol;
+                TextBlockExpression.Text = numberA + operation.ToString();
+            }
+            else if (numberA != 0 && TextBlockNumber.Text != "" && TextBlockNumber.Text != "-")
+            {
+                numberB = Double.Parse(TextBlockNumber.Text);
+
+                if (operation != symbol)
+                {
+                    TextBlockExpression.Text = numberA + operation.ToString() + numberB + "=";
+                    TextBlockNumber.Text = Operation(operation).ToString();
+                    HistoryList.Items.Add(new ListViewItem { Content = TextBlockExpression.Text + TextBlockNumber.Text, FontSize = 18 });
+                    numberA = Double.Parse(TextBlockNumber.Text);
+                    TextBlockNumber.Text = "";
+                    Calculating(symbol);
+                }
+                else if (operation == symbol)
+                {
+                    TextBlockExpression.Text = numberA + operation.ToString() + numberB + "=";
+                    TextBlockNumber.Text = Operation(symbol).ToString();
+                    HistoryList.Items.Add(new ListViewItem { Content = TextBlockExpression.Text + TextBlockNumber.Text, FontSize = 18 });
+                    numberA = 0;
+                    operation = '0';
+                }
+            }
+        }
+
+        private double Operation(char symbol) 
+        {
+            switch (symbol)
+            {
+                case '+':
+                    return numberA + numberB;
+                case '-':
+                    return numberA - numberB;
+                case '*':
+                    return numberA * numberB;
+                case '/':
+                    return numberA / numberB;
+                case 's':
+                    return numberB * numberB;
+                case 'r':
+                    return Math.Sqrt(numberB);
+                default:
+                    return 0;
+            }
+        }
+
+        private void ButtonPlus_Click(object sender, RoutedEventArgs e)
+        {
+            Calculating('+');
+        }
+
+        private void ButtonMinus_Click(object sender, RoutedEventArgs e)
+        {
+            Calculating('-');
+        }
+
+        private void ButtonMultiplication_Click(object sender, RoutedEventArgs e)
+        {
+            Calculating('*');
+        }
+
+        private void ButtonDivision_Click(object sender, RoutedEventArgs e)
+        {
+            Calculating('/');
+        }
+
         private void ButtonSquare_Click(object sender, RoutedEventArgs e)
         {
-            double a = Double.Parse(TextBlockNumber.Text);
-            TextBlockExpression.Text = a + "^2=";
-            a *= a;
-            TextBlockNumber.Text = a.ToString();
-            HistoryList.Items.Add(new ListViewItem { Content = TextBlockExpression.Text + TextBlockNumber.Text, FontSize = 18 });
+            OperationSquareOrRootSquare('s', "^2");
+        }
+
+        private void ButtonRoot_Click(object sender, RoutedEventArgs e)
+        {
+            OperationSquareOrRootSquare('r', "√");
+        }
+
+        private void ButtonEqual_Click(object sender, RoutedEventArgs e)
+        {
+            if (TextBlockExpression.Text != "" && TextBlockNumber.Text != "" && operation != '0' && TextBlockNumber.Text != "-")
+            {
+                Calculating(operation);
+            }
+        }
+
+        private void OperationSquareOrRootSquare(char oper, string symbol) 
+        {
+            if (TextBlockExpression.Text == "" && TextBlockNumber.Text != "" && TextBlockNumber.Text != "-" || TextBlockExpression.Text.Contains("^2") || TextBlockExpression.Text.Contains("√"))
+            {
+                numberB = Double.Parse(TextBlockNumber.Text);
+                TextBlockNumber.Text = Operation(oper).ToString();
+                if (symbol == "√") 
+                {
+                    TextBlockExpression.Text = symbol + numberB + "=";
+                    HistoryList.Items.Add(new ListViewItem { Content = symbol + numberB + "=" + TextBlockNumber.Text, FontSize = 18 });
+                }
+                else if (symbol == "^2")
+                {
+                    TextBlockExpression.Text = numberB + symbol + "=";
+                    HistoryList.Items.Add(new ListViewItem { Content = numberB + symbol + "=" + TextBlockNumber.Text, FontSize = 18 });
+                }
+            }
+            else if (TextBlockExpression.Text != "" && TextBlockNumber.Text != "" && TextBlockNumber.Text != "-")
+            {
+                numberB = Double.Parse(TextBlockNumber.Text);
+                TextBlockNumber.Text = Operation(oper).ToString();
+                if (symbol == "√")
+                {
+                    HistoryList.Items.Add(new ListViewItem { Content = symbol + numberB + "=" + TextBlockNumber.Text, FontSize = 18 });
+                }
+                else if (symbol == "^2")
+                {
+                    HistoryList.Items.Add(new ListViewItem { Content = numberB + symbol + "=" + TextBlockNumber.Text, FontSize = 18 });
+                }
+            }
+        }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (calculator.IsSelected)
+            {
+                FramePage.Navigate(typeof(MainPage));
+                TitleTextBlock.Text = "Главная";
+            }
+            else if (settings.IsSelected)
+            {
+                FramePage.Navigate(typeof(PageSettings));
+                TitleTextBlock.Text = "Поделиться";
+            }
+            else if (about.IsSelected)
+            {
+                FramePage.Navigate(typeof(PageAbout));
+                TitleTextBlock.Text = "Настройки";
+            }
         }
     }
 }

@@ -38,11 +38,19 @@
             <Button x:Name="HistoryButton" RelativePanel.AlignRightWithPanel="True"
                     FontFamily="Segoe MDL2 Assets" FontSize="36"
                     Content="&#xE81C;" Click="HistoryButton_Click" Background="#33595959"/>
+            <Button x:Name="ClearButton" RelativePanel.LeftOf="HistoryButton" Margin="0 0 20 0"
+                    FontFamily="Franklin Gothic Book" FontSize="40"
+                    Content="C" Background="#33595959" Width="56" Foreground="Red" FontStyle="Normal" FontWeight="Bold" Padding="8,-2,8,0" Click="ClearButton_Click"/>
         </RelativePanel>
+
+        <Frame Name="FramePage" Grid.RowSpan="8" Grid.ColumnSpan="4"></Frame>
 
         <SplitView Name="HamburgerSplitView" Grid.Row ="1" Grid.RowSpan="7" Grid.ColumnSpan ="2" OpenPaneLength="200" Canvas.ZIndex="1" Visibility="Visible" RequestedTheme="Dark" >
             <SplitView.Pane>
-                <ListBox SelectionMode="Single">
+                <ListBox SelectionMode="Single" SelectionChanged="ListBox_SelectionChanged">
+                    <ListBoxItem Name="calculator">
+                        <TextBlock FontSize="24" Text="Settings" />
+                    </ListBoxItem>
                     <ListBoxItem Name="settings">
                         <TextBlock FontSize="24" Text="Settings" />
                     </ListBoxItem>
@@ -57,10 +65,10 @@
             </SplitView.Content>
         </SplitView>
 
-        <SplitView Name="HistorySplitView" Grid.Row ="1" Grid.RowSpan="7" Grid.Column ="2" Grid.ColumnSpan ="2" OpenPaneLength="200" Canvas.ZIndex="1" Visibility="Visible" RequestedTheme="Dark" PanePlacement="Right">
+        <SplitView Name="HistorySplitView" Grid.Row ="1" Grid.RowSpan="7" Grid.Column ="1" Grid.ColumnSpan ="3" OpenPaneLength="280" Canvas.ZIndex="1" Visibility="Visible" RequestedTheme="Dark" PanePlacement="Right">
             <SplitView.Pane>
                 <ListView x:Name="HistoryList">
-                    <ListViewItem FontSize="24" Content = "History"/>
+                    <ListViewItem FontSize="28" Content = "History" FontWeight="Bold"/>
                 </ListView>
             </SplitView.Pane>
             <SplitView.Content>
@@ -75,7 +83,7 @@
             <TextBlock x:Name="TextBlockExpression" TextWrapping="Wrap" FontSize="6" TextAlignment="Right"/>
         </Viewbox>
         <Viewbox Grid.Row="2" HorizontalAlignment="Right" Margin="6,3,6,25" Grid.ColumnSpan="4">
-            <TextBlock x:Name="TextBlockNumber" TextWrapping="Wrap" FontSize="6" TextAlignment="Right"/>
+            <TextBlock x:Name="TextBlockNumber" TextWrapping="Wrap" FontSize="6" TextAlignment="Right" IsTextSelectionEnabled="True"/>
         </Viewbox>
         <!--#endregion -->
 
@@ -90,7 +98,7 @@
                 <TextBlock Text="^2"/>
             </Viewbox>
         </Button>
-        <Button x:Name="ButtonRoot" Grid.Row="3" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="32" FontWeight="Normal" FontFamily="Franklin Gothic Medium" FontStyle="Normal" RequestedTheme="Dark" Margin="1,1,1,1">
+        <Button x:Name="ButtonRoot" Grid.Row="3" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="32" FontWeight="Normal" FontFamily="Franklin Gothic Medium" FontStyle="Normal" RequestedTheme="Dark" Margin="1,1,1,1" Click="ButtonRoot_Click">
             <Viewbox>
                 <TextBlock Text="√"/>
             </Viewbox>
@@ -118,7 +126,7 @@
                 <TextBlock Text="9"/>
             </Viewbox>
         </Button>
-        <Button x:Name="ButtonDivision" Grid.Row="4" Grid.Column="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="32" FontWeight="Normal" FontFamily="Franklin Gothic Medium" FontStyle="Normal" RequestedTheme="Dark" Margin="1,1,1,1">
+        <Button x:Name="ButtonDivision" Grid.Row="4" Grid.Column="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="32" FontWeight="Normal" FontFamily="Franklin Gothic Medium" FontStyle="Normal" RequestedTheme="Dark" Margin="1,1,1,1" Click="ButtonDivision_Click">
             <Viewbox>
                 <TextBlock Text="/"/>
             </Viewbox>
@@ -141,7 +149,7 @@
                 <TextBlock Text="6"/>
             </Viewbox>
         </Button>
-        <Button x:Name="ButtonMultiplication" Grid.Row="5" Grid.Column="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="32" FontWeight="Normal" FontFamily="Franklin Gothic Medium" FontStyle="Normal" RequestedTheme="Dark" Margin="1,1,1,1">
+        <Button x:Name="ButtonMultiplication" Grid.Row="5" Grid.Column="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="32" FontWeight="Normal" FontFamily="Franklin Gothic Medium" FontStyle="Normal" RequestedTheme="Dark" Margin="1,1,1,1" Click="ButtonMultiplication_Click">
             <Viewbox>
                 <TextBlock Text="×"/>
             </Viewbox>
@@ -164,7 +172,7 @@
                 <TextBlock Text="3"/>
             </Viewbox>
         </Button>
-        <Button x:Name="ButtonMinus" Grid.Row="6" Grid.Column="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="32" FontWeight="Normal" FontFamily="Franklin Gothic Medium" FontStyle="Normal" RequestedTheme="Dark" Margin="1,1,1,1">
+        <Button x:Name="ButtonMinus" Grid.Row="6" Grid.Column="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="32" FontWeight="Normal" FontFamily="Franklin Gothic Medium" FontStyle="Normal" RequestedTheme="Dark" Margin="1,1,1,1" Click="ButtonMinus_Click">
             <Viewbox>
                 <TextBlock Text="-"/>
             </Viewbox>
@@ -182,12 +190,12 @@
                 <TextBlock Text="0"/>
             </Viewbox>
         </Button>
-        <Button x:Name="ButtonEqual" Grid.Row="7" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="32" FontWeight="Normal" FontFamily="Franklin Gothic Medium" FontStyle="Normal" RequestedTheme="Dark" Margin="1,1,1,1">
+        <Button x:Name="ButtonEqual" Grid.Row="7" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="32" FontWeight="Normal" FontFamily="Franklin Gothic Medium" FontStyle="Normal" RequestedTheme="Dark" Margin="1,1,1,1" Click="ButtonEqual_Click">
             <Viewbox>
                 <TextBlock Text="="/>
             </Viewbox>
         </Button>
-        <Button x:Name="ButtonPlus" Grid.Row="7" Grid.Column="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="32" FontWeight="Normal" FontFamily="Franklin Gothic Medium" FontStyle="Normal" RequestedTheme="Dark" Margin="1,1,1,1">
+        <Button x:Name="ButtonPlus" Grid.Row="7" Grid.Column="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="32" FontWeight="Normal" FontFamily="Franklin Gothic Medium" FontStyle="Normal" RequestedTheme="Dark" Margin="1,1,1,1" Click="ButtonPlus_Click">
             <Viewbox>
                 <TextBlock Text="+"/>
             </Viewbox>
