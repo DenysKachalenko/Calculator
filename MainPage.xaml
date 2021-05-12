@@ -30,51 +30,22 @@
 
         <!--#region Panel managment -->
         <RelativePanel Grid.Row="0" Grid.ColumnSpan="4">
-            <Button x:Name="HamburgerButton" RelativePanel.AlignLeftWithPanel="True"
-                    FontFamily="Segoe MDL2 Assets" FontSize="36"
-                    Content="&#xE700;" Click="HamburgerButton_Click" Background="#33595959"/>
-            <TextBlock Name="TitleTextBlock" RelativePanel.RightOf="HamburgerButton"
+            <TextBlock Name="TitleTextBlock"
                        FontSize="28" FontWeight="Bold" Margin="30 5 0 0" Text="Calculator" />
             <Button x:Name="HistoryButton" RelativePanel.AlignRightWithPanel="True"
                     FontFamily="Segoe MDL2 Assets" FontSize="36"
                     Content="&#xE81C;" Click="HistoryButton_Click" Background="#33595959"/>
-            <Button x:Name="ClearButton" RelativePanel.LeftOf="HistoryButton" Margin="0 0 20 0"
+            <Button x:Name="ClearButton" RelativePanel.LeftOf="HistoryButton" Margin="0 0 50 0"
                     FontFamily="Franklin Gothic Book" FontSize="40"
                     Content="C" Background="#33595959" Width="56" Foreground="Red" FontStyle="Normal" FontWeight="Bold" Padding="8,-2,8,0" Click="ClearButton_Click"/>
         </RelativePanel>
 
-        <Frame Name="FramePage" Grid.RowSpan="8" Grid.ColumnSpan="4"></Frame>
-
-        <SplitView Name="HamburgerSplitView" Grid.Row ="1" Grid.RowSpan="7" Grid.ColumnSpan ="2" OpenPaneLength="200" Canvas.ZIndex="1" Visibility="Visible" RequestedTheme="Dark" >
-            <SplitView.Pane>
-                <ListBox SelectionMode="Single" SelectionChanged="ListBox_SelectionChanged">
-                    <ListBoxItem Name="calculator">
-                        <TextBlock FontSize="24" Text="Settings" />
-                    </ListBoxItem>
-                    <ListBoxItem Name="settings">
-                        <TextBlock FontSize="24" Text="Settings" />
-                    </ListBoxItem>
-                    <ListBoxItem Name="about">
-                        <TextBlock FontSize="24" Text="About" />
-                    </ListBoxItem>
-                </ListBox>
-            </SplitView.Pane>
-            <SplitView.Content>
-                <Frame Name="FrameMenu">
-                </Frame>
-            </SplitView.Content>
-        </SplitView>
-
-        <SplitView Name="HistorySplitView" Grid.Row ="1" Grid.RowSpan="7" Grid.Column ="1" Grid.ColumnSpan ="3" OpenPaneLength="280" Canvas.ZIndex="1" Visibility="Visible" RequestedTheme="Dark" PanePlacement="Right">
+        <SplitView Name="HistorySplitView" Grid.Row ="1" Grid.RowSpan="7" Grid.Column ="0" Grid.ColumnSpan ="4" Canvas.ZIndex="1" Visibility="Visible" RequestedTheme="Dark" PanePlacement="Right" OpenPaneLength="360" >
             <SplitView.Pane>
                 <ListView x:Name="HistoryList">
-                    <ListViewItem FontSize="28" Content = "History" FontWeight="Bold"/>
+                    <ListViewItem FontSize="28" Content = "History" FontWeight="Bold" />
                 </ListView>
             </SplitView.Pane>
-            <SplitView.Content>
-                <Frame Name="FrameHistory" >
-                </Frame>
-            </SplitView.Content>
         </SplitView>
         <!--#endregion -->
 

@@ -31,10 +31,6 @@ namespace Calculator
         {
             this.InitializeComponent();
         }
-        private void HamburgerButton_Click(object sender, RoutedEventArgs e)
-        {
-            HamburgerSplitView.IsPaneOpen = !HamburgerSplitView.IsPaneOpen;
-        }
 
         private void HistoryButton_Click(object sender, RoutedEventArgs e)
         {
@@ -239,7 +235,7 @@ namespace Calculator
 
         private void OperationSquareOrRootSquare(char oper, string symbol) 
         {
-            if (TextBlockExpression.Text == "" && TextBlockNumber.Text != "" && TextBlockNumber.Text != "-" || TextBlockExpression.Text.Contains("^2") || TextBlockExpression.Text.Contains("√"))
+            if (TextBlockExpression.Text == "" && TextBlockNumber.Text != "" && TextBlockNumber.Text != "-" || TextBlockExpression.Text.Contains("^2") || TextBlockExpression.Text.Contains("√") || TextBlockExpression.Text.Contains("="))
             {
                 numberB = Double.Parse(TextBlockNumber.Text);
                 TextBlockNumber.Text = Operation(oper).ToString();
@@ -266,25 +262,6 @@ namespace Calculator
                 {
                     HistoryList.Items.Add(new ListViewItem { Content = numberB + symbol + "=" + TextBlockNumber.Text, FontSize = 18 });
                 }
-            }
-        }
-
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (calculator.IsSelected)
-            {
-                FramePage.Navigate(typeof(MainPage));
-                TitleTextBlock.Text = "Главная";
-            }
-            else if (settings.IsSelected)
-            {
-                FramePage.Navigate(typeof(PageSettings));
-                TitleTextBlock.Text = "Поделиться";
-            }
-            else if (about.IsSelected)
-            {
-                FramePage.Navigate(typeof(PageAbout));
-                TitleTextBlock.Text = "Настройки";
             }
         }
     }
