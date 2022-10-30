@@ -13,19 +13,13 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
-
 namespace Calculator
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class MainPage : Page
     {
-
-        double numberA = 0;
-        double numberB = 0;
-        char operation = '0';
+        private double FirstNumber { get; set; } = 0;
+        private double SecondNumber { get; set; } = 0;
+        private char Operation { get; set; } = '0';
 
         public MainPage()
         {
@@ -41,19 +35,19 @@ namespace Calculator
         {
             TextBlockNumber.Text = "";
             TextBlockExpression.Text = "";
-            numberA = 0;
-            numberB = 0;
-            operation = '0';
+            FirstNumber = 0;
+            SecondNumber = 0;
+            Operation = '0';
         }
 
-        private void AddNumber(char symbol)
+        private void AddNumber(char Symbol)
         {
-            TextBlockNumber.Text += symbol; 
+            TextBlockNumber.Text += Symbol; 
         }
 
         private void ButtonDelete_Click(object sender, RoutedEventArgs e)
         {
-            if (TextBlockNumber.Text != "") 
+            if (TextBlockNumber.Text != string.Empty) 
             {
                 TextBlockNumber.Text = TextBlockNumber.Text.Remove(TextBlockNumber.Text.Length -1,  1);
             }
@@ -62,7 +56,7 @@ namespace Calculator
         private void ButtonPosOrNeg_Click(object sender, RoutedEventArgs e)
         {
 
-            if (TextBlockNumber.Text == "")
+            if (TextBlockNumber.Text == string.Empty)
             {
                 AddNumber('-');
             }
@@ -78,7 +72,7 @@ namespace Calculator
 
         private void ButtonPoint_Click(object sender, RoutedEventArgs e)
         {
-            if (TextBlockNumber.Text != "" && TextBlockNumber.Text != "-" && !TextBlockNumber.Text.Contains(".")) 
+            if (TextBlockNumber.Text != string.Empty && TextBlockNumber.Text != "-" && !TextBlockNumber.Text.Contains(".")) 
             {
                 AddNumber('.');
             }
@@ -136,60 +130,60 @@ namespace Calculator
         }
         #endregion
 
-        public void Calculating(char symbol)
+        private void Calculating(char Symbol)
         {
-            if (numberA == 0 && TextBlockNumber.Text != "" && TextBlockNumber.Text != "-")
+            if (FirstNumber == 0 && TextBlockNumber.Text != string.Empty && TextBlockNumber.Text != "-")
             {
-                operation = symbol;
-                numberA = Double.Parse(TextBlockNumber.Text);
-                TextBlockExpression.Text = numberA + operation.ToString();
-                TextBlockNumber.Text = "";
+                Operation = Symbol;
+                FirstNumber = Double.Parse(TextBlockNumber.Text);
+                TextBlockExpression.Text = FirstNumber + Operation.ToString();
+                TextBlockNumber.Text = string.Empty;
             }
-            else if (numberA != 0 && TextBlockNumber.Text == "" && TextBlockNumber.Text != "-")
+            else if (FirstNumber != 0 && TextBlockNumber.Text == string.Empty && TextBlockNumber.Text != "-")
             {
-                operation = symbol;
-                TextBlockExpression.Text = numberA + operation.ToString();
+                Operation = Symbol;
+                TextBlockExpression.Text = FirstNumber + Operation.ToString();
             }
-            else if (numberA != 0 && TextBlockNumber.Text != "" && TextBlockNumber.Text != "-")
+            else if (FirstNumber != 0 && TextBlockNumber.Text != string.Empty && TextBlockNumber.Text != "-")
             {
-                numberB = Double.Parse(TextBlockNumber.Text);
+                SecondNumber = Double.Parse(TextBlockNumber.Text);
 
-                if (operation != symbol)
+                if (Operation != Symbol)
                 {
-                    TextBlockExpression.Text = numberA + operation.ToString() + numberB + "=";
-                    TextBlockNumber.Text = Operation(operation).ToString();
+                    TextBlockExpression.Text = FirstNumber + Operation.ToString() + SecondNumber + "=";
+                    TextBlockNumber.Text = PerformAnOperation(Operation).ToString();
                     HistoryList.Items.Add(new ListViewItem { Content = TextBlockExpression.Text + TextBlockNumber.Text, FontSize = 18 });
-                    numberA = Double.Parse(TextBlockNumber.Text);
-                    TextBlockNumber.Text = "";
-                    Calculating(symbol);
+                    FirstNumber = Double.Parse(TextBlockNumber.Text);
+                    TextBlockNumber.Text = string.Empty;
+                    Calculating(Symbol);
                 }
-                else if (operation == symbol)
+                else if (Operation == Symbol)
                 {
-                    TextBlockExpression.Text = numberA + operation.ToString() + numberB + "=";
-                    TextBlockNumber.Text = Operation(symbol).ToString();
+                    TextBlockExpression.Text = FirstNumber + Operation.ToString() + SecondNumber + "=";
+                    TextBlockNumber.Text = PerformAnOperation(Symbol).ToString();
                     HistoryList.Items.Add(new ListViewItem { Content = TextBlockExpression.Text + TextBlockNumber.Text, FontSize = 18 });
-                    numberA = 0;
-                    operation = '0';
+                    FirstNumber = 0;
+                    Operation = '0';
                 }
             }
         }
 
-        private double Operation(char symbol) 
+        private double PerformAnOperation(char Symbol) 
         {
-            switch (symbol)
+            switch (Symbol)
             {
                 case '+':
-                    return numberA + numberB;
+                    return FirstNumber + SecondNumber;
                 case '-':
-                    return numberA - numberB;
+                    return FirstNumber - SecondNumber;
                 case '*':
-                    return numberA * numberB;
+                    return FirstNumber * SecondNumber;
                 case '/':
-                    return numberA / numberB;
+                    return FirstNumber / SecondNumber;
                 case 's':
-                    return numberB * numberB;
+                    return SecondNumber * SecondNumber;
                 case 'r':
-                    return Math.Sqrt(numberB);
+                    return Math.Sqrt(SecondNumber);
                 default:
                     return 0;
             }
@@ -227,40 +221,40 @@ namespace Calculator
 
         private void ButtonEqual_Click(object sender, RoutedEventArgs e)
         {
-            if (TextBlockExpression.Text != "" && TextBlockNumber.Text != "" && operation != '0' && TextBlockNumber.Text != "-")
+            if (TextBlockExpression.Text != string.Empty && TextBlockNumber.Text != string.Empty && Operation != '0' && TextBlockNumber.Text != "-")
             {
-                Calculating(operation);
+                Calculating(Operation);
             }
         }
 
-        private void OperationSquareOrRootSquare(char oper, string symbol) 
+        private void OperationSquareOrRootSquare(char OperationSymbol, string Symbol) 
         {
-            if (TextBlockExpression.Text == "" && TextBlockNumber.Text != "" && TextBlockNumber.Text != "-" || TextBlockExpression.Text.Contains("^2") || TextBlockExpression.Text.Contains("√") || TextBlockExpression.Text.Contains("="))
+            if (TextBlockExpression.Text == "" && TextBlockNumber.Text != string.Empty && TextBlockNumber.Text != "-" || TextBlockExpression.Text.Contains("^2") || TextBlockExpression.Text.Contains("√") || TextBlockExpression.Text.Contains("="))
             {
-                numberB = Double.Parse(TextBlockNumber.Text);
-                TextBlockNumber.Text = Operation(oper).ToString();
-                if (symbol == "√") 
+                SecondNumber = Double.Parse(TextBlockNumber.Text);
+                TextBlockNumber.Text = PerformAnOperation(OperationSymbol).ToString();
+                if (Symbol == "√") 
                 {
-                    TextBlockExpression.Text = symbol + numberB + "=";
-                    HistoryList.Items.Add(new ListViewItem { Content = symbol + numberB + "=" + TextBlockNumber.Text, FontSize = 18 });
+                    TextBlockExpression.Text = Symbol + SecondNumber + "=";
+                    HistoryList.Items.Add(new ListViewItem { Content = Symbol + SecondNumber + "=" + TextBlockNumber.Text, FontSize = 18 });
                 }
-                else if (symbol == "^2")
+                else if (Symbol == "^2")
                 {
-                    TextBlockExpression.Text = numberB + symbol + "=";
-                    HistoryList.Items.Add(new ListViewItem { Content = numberB + symbol + "=" + TextBlockNumber.Text, FontSize = 18 });
+                    TextBlockExpression.Text = SecondNumber + Symbol + "=";
+                    HistoryList.Items.Add(new ListViewItem { Content = SecondNumber + Symbol + "=" + TextBlockNumber.Text, FontSize = 18 });
                 }
             }
-            else if (TextBlockExpression.Text != "" && TextBlockNumber.Text != "" && TextBlockNumber.Text != "-")
+            else if (TextBlockExpression.Text != string.Empty && TextBlockNumber.Text != string.Empty && TextBlockNumber.Text != "-")
             {
-                numberB = Double.Parse(TextBlockNumber.Text);
-                TextBlockNumber.Text = Operation(oper).ToString();
-                if (symbol == "√")
+                SecondNumber = Double.Parse(TextBlockNumber.Text);
+                TextBlockNumber.Text = PerformAnOperation(OperationSymbol).ToString();
+                if (Symbol == "√")
                 {
-                    HistoryList.Items.Add(new ListViewItem { Content = symbol + numberB + "=" + TextBlockNumber.Text, FontSize = 18 });
+                    HistoryList.Items.Add(new ListViewItem { Content = Symbol + SecondNumber + "=" + TextBlockNumber.Text, FontSize = 18 });
                 }
-                else if (symbol == "^2")
+                else if (Symbol == "^2")
                 {
-                    HistoryList.Items.Add(new ListViewItem { Content = numberB + symbol + "=" + TextBlockNumber.Text, FontSize = 18 });
+                    HistoryList.Items.Add(new ListViewItem { Content = SecondNumber + Symbol + "=" + TextBlockNumber.Text, FontSize = 18 });
                 }
             }
         }
