@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using System.Globalization;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 namespace Calculator
 {
@@ -151,8 +141,8 @@ namespace Calculator
                 if (Operation != Symbol)
                 {
                     TextBlockExpression.Text = FirstNumber + Operation.ToString() + SecondNumber + "=";
-                    TextBlockNumber.Text = PerformAnOperation(Operation).ToString();
-                    HistoryList.Items.Add(new ListViewItem { Content = TextBlockExpression.Text + TextBlockNumber.Text, FontSize = 18 });
+                    TextBlockNumber.Text = PerformAnOperation(Operation).ToString(CultureInfo.InvariantCulture);
+                    HistoryList.Items?.Add(new ListViewItem { Content = TextBlockExpression.Text + TextBlockNumber.Text, FontSize = 18 });
                     FirstNumber = Double.Parse(TextBlockNumber.Text);
                     TextBlockNumber.Text = string.Empty;
                     Calculating(Symbol);
@@ -160,8 +150,8 @@ namespace Calculator
                 else if (Operation == Symbol)
                 {
                     TextBlockExpression.Text = FirstNumber + Operation.ToString() + SecondNumber + "=";
-                    TextBlockNumber.Text = PerformAnOperation(Symbol).ToString();
-                    HistoryList.Items.Add(new ListViewItem { Content = TextBlockExpression.Text + TextBlockNumber.Text, FontSize = 18 });
+                    TextBlockNumber.Text = PerformAnOperation(Symbol).ToString(CultureInfo.InvariantCulture);
+                    HistoryList.Items?.Add(new ListViewItem { Content = TextBlockExpression.Text + TextBlockNumber.Text, FontSize = 18 });
                     FirstNumber = 0;
                     Operation = '0';
                 }
@@ -231,30 +221,42 @@ namespace Calculator
         {
             if (TextBlockExpression.Text == "" && TextBlockNumber.Text != string.Empty && TextBlockNumber.Text != "-" || TextBlockExpression.Text.Contains("^2") || TextBlockExpression.Text.Contains("√") || TextBlockExpression.Text.Contains("="))
             {
-                SecondNumber = Double.Parse(TextBlockNumber.Text);
-                TextBlockNumber.Text = PerformAnOperation(OperationSymbol).ToString();
-                if (Symbol == "√") 
+                if (!Double.TryParse(TextBlockNumber.Text, out var SecondNumberTemp))
+                {
+                    return;
+                }
+
+                SecondNumber = SecondNumberTemp;
+
+                TextBlockNumber.Text = PerformAnOperation(OperationSymbol).ToString(CultureInfo.InvariantCulture);
+                if (Symbol == "√")
                 {
                     TextBlockExpression.Text = Symbol + SecondNumber + "=";
-                    HistoryList.Items.Add(new ListViewItem { Content = Symbol + SecondNumber + "=" + TextBlockNumber.Text, FontSize = 18 });
+                    HistoryList.Items?.Add(new ListViewItem { Content = Symbol + SecondNumber + "=" + TextBlockNumber.Text, FontSize = 18 });
                 }
                 else if (Symbol == "^2")
                 {
                     TextBlockExpression.Text = SecondNumber + Symbol + "=";
-                    HistoryList.Items.Add(new ListViewItem { Content = SecondNumber + Symbol + "=" + TextBlockNumber.Text, FontSize = 18 });
+                    HistoryList.Items?.Add(new ListViewItem { Content = SecondNumber + Symbol + "=" + TextBlockNumber.Text, FontSize = 18 });
                 }
             }
             else if (TextBlockExpression.Text != string.Empty && TextBlockNumber.Text != string.Empty && TextBlockNumber.Text != "-")
             {
-                SecondNumber = Double.Parse(TextBlockNumber.Text);
-                TextBlockNumber.Text = PerformAnOperation(OperationSymbol).ToString();
+                if (!Double.TryParse(TextBlockNumber.Text, out var SecondNumberTemp))
+                {
+                    return;
+                }
+
+                SecondNumber = SecondNumberTemp;
+
+                TextBlockNumber.Text = PerformAnOperation(OperationSymbol).ToString(CultureInfo.InvariantCulture);
                 if (Symbol == "√")
                 {
-                    HistoryList.Items.Add(new ListViewItem { Content = Symbol + SecondNumber + "=" + TextBlockNumber.Text, FontSize = 18 });
+                    HistoryList.Items?.Add(new ListViewItem { Content = Symbol + SecondNumber + "=" + TextBlockNumber.Text, FontSize = 18 });
                 }
                 else if (Symbol == "^2")
                 {
-                    HistoryList.Items.Add(new ListViewItem { Content = SecondNumber + Symbol + "=" + TextBlockNumber.Text, FontSize = 18 });
+                    HistoryList.Items?.Add(new ListViewItem { Content = SecondNumber + Symbol + "=" + TextBlockNumber.Text, FontSize = 18 });
                 }
             }
         }
