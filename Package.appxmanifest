@@ -8,14 +8,14 @@
 
   <Identity
     Name="cf1d4830-662c-46bd-82a8-129f55d1baf6"
-    Publisher="CN=kacha"
+    Publisher="CN=DenysKachalenko"
     Version="1.0.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="cf1d4830-662c-46bd-82a8-129f55d1baf6" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>Calculator</DisplayName>
-    <PublisherDisplayName>Kachalenko_Denis</PublisherDisplayName>
+    <PublisherDisplayName>DenysKachalenko</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
